@@ -96,7 +96,7 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     private void Enviar_servidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_servidorActionPerformed
         
         try {
-            Socket socket = new Socket("127.0.0.1",5000);
+            Socket socket = new Socket("127.0.0.1",3000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             out.writeUTF(Texto_servidor.getText());
             socket.close();

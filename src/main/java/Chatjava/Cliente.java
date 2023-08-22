@@ -164,7 +164,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     public void run() {
         
         try {
-            ServerSocket server =new ServerSocket(5000);
+            ServerSocket server =new ServerSocket(3000);
             while(true){
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
