@@ -47,6 +47,7 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
 
         jLabel1.setText("SERVIDOR");
 
+        campo.setEditable(false);
         campo.setColumns(20);
         campo.setRows(5);
         jScrollPane1.setViewportView(campo);
@@ -79,7 +80,7 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
