@@ -4,17 +4,24 @@
  */
 package Chatjava;
 
+import java.io.DataInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  *
  * @author jose
  */
-public class Servidor extends javax.swing.JFrame {
+public class Servidor extends javax.swing.JFrame implements Runnable{
 
     /**
-     * Creates new form Servidor
+     * 
      */
     public Servidor() {
         initComponents();
+        Thread hilo = new Thread(this);
+        hilo.start();
+        
     }
 
     /**
@@ -26,17 +33,39 @@ public class Servidor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        campo = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("SERVIDOR");
+
+        campo.setColumns(20);
+        campo.setRows(5);
+        jScrollPane1.setViewportView(campo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,5 +107,29 @@ public class Servidor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea campo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        try {
+            
+            ServerSocket server =new ServerSocket(5000);
+            while(true){
+                Socket serversocker =  server.accept();
+                DataInputStream datos = new DataInputStream(serversocker.getInputStream());
+                String mensajes = datos.readUTF();
+                campo.append("\n"+"cliente: "+mensajes);
+            }
+            
+            
+            
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+    }
 }
