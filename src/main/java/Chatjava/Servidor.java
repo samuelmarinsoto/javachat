@@ -5,8 +5,12 @@
 package Chatjava;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,6 +52,11 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
         jScrollPane1.setViewportView(campo);
 
         Enviar_servidor.setText("Enviar");
+        Enviar_servidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Enviar_servidorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +92,20 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Enviar_servidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_servidorActionPerformed
+        
+        try {
+            Socket socket = new Socket("127.0.0.1",5000);
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            out.writeUTF(Texto_servidor.getText());
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+    }//GEN-LAST:event_Enviar_servidorActionPerformed
 
     /**
      * @param args the command line arguments
