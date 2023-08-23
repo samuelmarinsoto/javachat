@@ -160,7 +160,7 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
                 String mensajes = datos.readUTF();
-                campo.append("\n"+"cliente: "+mensajes);
+                campo.append("\n"+mensajes);
             }
             
             

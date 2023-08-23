@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +37,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        nombre_cliente = new javax.swing.JLabel();
         txt_mensaje = new javax.swing.JTextField();
         btn_enviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,7 +46,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("CLIENTE");
+        nombre_cliente.setText("CLIENTE");
 
         txt_mensaje.setText(" ");
         txt_mensaje.addActionListener(new java.awt.event.ActionListener() {
@@ -91,21 +92,22 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
                                 .addComponent(emoji, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(231, 231, 231)
-                        .addComponent(jLabel1)))
+                        .addComponent(nombre_cliente)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addComponent(nombre_cliente)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emoji, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emoji, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
 
@@ -121,7 +123,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
             
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeUTF(txt_mensaje.getText());
+            out.writeUTF(nombre_cliente.getText()+": "+txt_mensaje.getText());
             socket.close();
             
            
@@ -184,8 +186,8 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private javax.swing.JTextArea Campos_textoC;
     private javax.swing.JButton btn_enviar;
     private javax.swing.JButton emoji;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel nombre_cliente;
     private javax.swing.JTextField txt_mensaje;
     // End of variables declaration//GEN-END:variables
 
@@ -193,6 +195,9 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     public void run() {
         
         try {
+            Random random = new Random();
+            int numero_cliente = random.nextInt(20) + 1;
+            nombre_cliente.setText("cliente: "+numero_cliente);
              
             ServerSocket server =new ServerSocket(3000);
             while(true){
