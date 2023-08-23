@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author jose
+ * Clase que implementa el cliente
+ * 
  */
 public class Cliente extends javax.swing.JFrame implements Runnable{
 
@@ -117,7 +117,11 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private void txt_mensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mensajeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_mensajeActionPerformed
-
+    /**
+     * Botton de enviar. Crea un socket que se conecta al servidor, y envia el 
+     * texto que esta en el JTextField, y luego cierra el socket.
+     * 
+     */
     private void btn_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarActionPerformed
         try {
             
@@ -128,12 +132,17 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
             
            
         }
-        catch(Exception e){
-            System.out.println(e);
+        catch(Exception ex){
+            System.out.println(ex);
         
         }
     }//GEN-LAST:event_btn_enviarActionPerformed
-
+    /**
+     * Boton de emoji. Crea un socket que se conecta al servidor, envia una carita feliz,
+     * y luego cierra el socket.
+     * @param evt
+     * @throws IOException
+     */
     private void emojiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emojiActionPerformed
         try {
             Socket socket = new Socket("127.0.0.1",5000);
@@ -147,7 +156,9 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_emojiActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Funcion principal. Invoka el resto del codigo para inicializar la interfaz
+     * @param args
+     * 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -190,7 +201,9 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel nombre_cliente;
     private javax.swing.JTextField txt_mensaje;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * 
+     */
     @Override
     public void run() {
         

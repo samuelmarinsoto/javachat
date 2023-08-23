@@ -13,12 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author jose
+ * Clase que implementa el servidor
+ * 
+ * 
  */
 public class Servidor extends javax.swing.JFrame implements Runnable{
 
     /**
+     * 
      * 
      */
     public Servidor() {
@@ -93,7 +95,12 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * 
+     * 
+     * @param evt 
+     */
     private void Enviar_servidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_servidorActionPerformed
         
         try {
@@ -150,7 +157,13 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     *
+     *
+     *
+     *
+     * 
+     */
     @Override
     public void run() {
         try {
