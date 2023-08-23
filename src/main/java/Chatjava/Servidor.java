@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class Servidor extends javax.swing.JFrame implements Runnable{
 
     /**
-     * 
+     * Crea un hilo al construir la clase.
      * 
      */
     public Servidor() {
@@ -97,9 +97,11 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
     
     /**
+     * Funcion para enviar mensajes al cliente desde el servidor. Habre un socket con el cliente,
+     * lee el texto del JTextField en la interfaz del servidor y lo envia al cliente.
      * 
-     * 
-     * @param evt 
+     * @param evt parte de interfaz, ignorar
+     * @throws IOException
      */
     private void Enviar_servidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_servidorActionPerformed
         
@@ -116,7 +118,8 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_Enviar_servidorActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Funcion main. Invoka el resto del codigo para inicializar la interfaz.
+     * @param args 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -158,11 +161,10 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     /**
+     * Funcion principal. Inicializa el servidor en el puerto 5000, y lo deja
+     * escuchando mensajes entrantes para mostrarlos en la interfaz
      *
-     *
-     *
-     *
-     * 
+     * @throws Exception
      */
     @Override
     public void run() {

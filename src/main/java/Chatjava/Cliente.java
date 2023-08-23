@@ -14,12 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase que implementa el cliente
+ * Clase que implementa el cliente.
  * 
  */
 public class Cliente extends javax.swing.JFrame implements Runnable{
 
     Socket socket;
+    /**
+     * Crea un hilo al construir la clase.
+     */
     public Cliente() {
         initComponents();
         Thread hilo = new Thread(this);
@@ -140,7 +143,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     /**
      * Boton de emoji. Crea un socket que se conecta al servidor, envia una carita feliz,
      * y luego cierra el socket.
-     * @param evt
+     * @param evt parte de interfaz, ignorar
      * @throws IOException
      */
     private void emojiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emojiActionPerformed
@@ -156,7 +159,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_emojiActionPerformed
 
     /**
-     * Funcion principal. Invoka el resto del codigo para inicializar la interfaz
+     * Funcion main. Invoka el resto del codigo para inicializar la interfaz
      * @param args
      * 
      */
@@ -202,7 +205,9 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private javax.swing.JTextField txt_mensaje;
     // End of variables declaration//GEN-END:variables
     /**
-     * 
+     * Funcion principal. Le asigna un numero aleatoreo al cliente para diferenciarlo, y 
+     * abre un socket conectado al servidor para leer los mensajes que le manden y mostrarlos en pantallas.
+     * @throws Exception
      */
     @Override
     public void run() {
