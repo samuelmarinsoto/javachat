@@ -114,7 +114,7 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
     private void Enviar_servidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_servidorActionPerformed
         
         try {
-            Socket socket = new Socket("127.0.0.1",3000);
+            Socket socket = new Socket("127.0.0.1",3211);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             out.writeUTF(Texto_servidor.getText());
             socket.close();
@@ -200,7 +200,20 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
      
  
                 }
-                else{
+                else{ 
+                  
+                    Socket mensajepuertos = null;
+                    for (int i = 0; i < lista_puertos.size(); i++) {
+                       
+                    System.out.println(lista_puertos.get(i));
+                    mensajepuertos = new Socket("127.0.0.1",lista_puertos.get(i));
+                    DataOutputStream out = new DataOutputStream(mensajepuertos.getOutputStream());
+                    out.writeUTF(mensajes);
+                    mensajepuertos.close();
+                       
+                            
+                            }
+                    
                     campo.append("\n"+mensajes);
                     
                     
