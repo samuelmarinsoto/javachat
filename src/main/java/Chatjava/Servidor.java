@@ -28,9 +28,10 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
      * Crea un hilo al construir la clase.
      * 
      */
+    
     public Servidor() {
         
-       
+        
         initComponents();
         Thread hilo = new Thread(this);
         hilo.start();
@@ -175,6 +176,8 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
      */
     @Override
     public void run() {
+        
+        LinkedList<Integer> lista_puertos = new LinkedList<Integer>();
         try {
             
             ServerSocket server =new ServerSocket(5000);
@@ -182,12 +185,25 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
                 String mensajes = datos.readUTF();
-                if(Objects.equals("h", "h")){
-                    campo.append("puerto"+mensajes);
-               
+                if(Objects.equals(String.valueOf(mensajes.charAt(0)), "0")){
+          
+                     mensajes = mensajes.substring(1, mensajes.length() );
+                     int puerto_final = Integer.parseInt(mensajes);
+                     lista_puertos.add(puerto_final);
+                     
+                     
+
+                     
+                    campo.append("\n"+"puerto"+puerto_final);
+                    
+                    
+     
+ 
                 }
                 else{
                     campo.append("\n"+mensajes);
+                    
+                    
                 }
                 
             }
