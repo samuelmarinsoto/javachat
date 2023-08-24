@@ -214,10 +214,19 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
         
         try {
             Random random = new Random();
-            int numero_cliente = random.nextInt(20) + 1;
+            int numero_cliente = random.nextInt(100) + 1;
             nombre_cliente.setText("cliente: "+numero_cliente);
+            int numero_port =  random.nextInt(5000) + 5000;
+            ServerSocket server =new ServerSocket(numero_port);
              
-            ServerSocket server =new ServerSocket(3000);
+            String numero_mensaje = String.valueOf("0"+numero_port);
+            
+            Socket socket = new Socket("127.0.0.1",5000);
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            out.writeUTF( numero_mensaje);
+            socket.close();
+            
+            
             while(true){
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());

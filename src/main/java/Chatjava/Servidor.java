@@ -9,6 +9,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,12 +20,17 @@ import java.util.logging.Logger;
  * 
  */
 public class Servidor extends javax.swing.JFrame implements Runnable{
+    
+    
+    
 
     /**
      * Crea un hilo al construir la clase.
      * 
      */
     public Servidor() {
+        
+       
         initComponents();
         Thread hilo = new Thread(this);
         hilo.start();
@@ -175,7 +182,14 @@ public class Servidor extends javax.swing.JFrame implements Runnable{
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
                 String mensajes = datos.readUTF();
-                campo.append("\n"+mensajes);
+                if(Objects.equals("h", "h")){
+                    campo.append("puerto"+mensajes);
+               
+                }
+                else{
+                    campo.append("\n"+mensajes);
+                }
+                
             }
             
             
