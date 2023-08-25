@@ -150,7 +150,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
         try {
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeUTF("cliente: "+"😀");
+            out.writeUTF(nombre_cliente.getText()+": "+"😀");
             socket.close();
             
         } catch (IOException ex) {
@@ -231,7 +231,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
                 String mensajes = datos.readUTF();
-                Campos_textoC.append("\n"+"servidor: "+mensajes);
+                Campos_textoC.append("\n"+mensajes);
             
             
             }
