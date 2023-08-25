@@ -26,9 +26,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     public Cliente() {
         initComponents();
         Thread hilo = new Thread(this);
-        hilo.start();
-        
-        
+        hilo.start();   
     }
 
     /**
