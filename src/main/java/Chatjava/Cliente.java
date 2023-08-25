@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Chatjava;
 
 import java.io.DataInputStream;
@@ -9,26 +5,25 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Clase que implementa el cliente.
- * 
- */
+
 public class Cliente extends javax.swing.JFrame implements Runnable{
 
+	/**
+	 * De aqui hasta la funcion sobrecargada de run() (linea 112), es puro codigo
+	 * autogenerado por Netbeans para la interfaz.
+	 */
+	 
     Socket socket;
-    /**
-     * Crea un hilo al construir la clase.
-     */
+
     public Cliente() {
         initComponents();
         Thread hilo = new Thread(this);
         hilo.start();   
     }
-
+    	 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,31 +113,26 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private void txt_mensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mensajeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_mensajeActionPerformed
+    
     /**
-     * Botton de enviar. Crea un socket que se conecta al servidor, y envia el 
-     * texto que esta en el JTextField, y luego cierra el socket.
-     * 
+     * Botón de enviar. Crea un socket que se conecta al servidor, envía el 
+     * texto que esta en el campo de escribir, y luego cierra el socket.
      */
     private void btn_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarActionPerformed
         try {
-            
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             out.writeUTF(nombre_cliente.getText()+": "+txt_mensaje.getText());
-            socket.close();
-            
-           
+            socket.close();   
         }
         catch(Exception ex){
             System.out.println(ex);
-        
         }
     }//GEN-LAST:event_btn_enviarActionPerformed
+    
     /**
-     * Boton de emoji. Crea un socket que se conecta al servidor, envia una carita feliz,
+     * Botón de emoji. Crea un socket que se conecta al servidor, envia una carita feliz,
      * y luego cierra el socket.
-     * @param evt parte de interfaz, ignorar
-     * @throws IOException
      */
     private void emojiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emojiActionPerformed
         try {
@@ -155,12 +145,10 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
             System.out.println(ex);
         }
     }//GEN-LAST:event_emojiActionPerformed
-
-    /**
-     * Funcion main. Invoka el resto del codigo para inicializar la interfaz
-     * @param args
-     * 
-     */
+    
+	/**
+	 * Código autogenerado por Netbeans para la interfaz gráfica
+	 */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -202,42 +190,42 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel nombre_cliente;
     private javax.swing.JTextField txt_mensaje;
     // End of variables declaration//GEN-END:variables
-    /**
-     * Funcion principal. Le asigna un numero aleatoreo al cliente para diferenciarlo, y 
-     * abre un socket conectado al servidor para leer los mensajes que le manden y mostrarlos en pantallas.
-     * @throws Exception
-     */
+    
     @Override
     public void run() {
         
         try {
-            Random random = new Random();
-            int numero_cliente = random.nextInt(100) + 1;
-            nombre_cliente.setText("cliente: "+numero_cliente);
-            int numero_port =  random.nextInt(5000) + 5000;
-            ServerSocket server =new ServerSocket(numero_port);
-             
-            String numero_mensaje = String.valueOf("0"+numero_port);
-            
+        
+        	/**
+        	 * Se conecta a un socket con un puerto libre, y luego codifica al puerto
+        	 * para enviarlo al servidor y que este lo guarde. Ver Server.java
+        	 * 
+        	 * El puerto se codifica transformandolo en un string y añadiendole un "0"
+        	 * al principio. 
+        	 */
+            ServerSocket server = new ServerSocket(0);
             Socket socket = new Socket("127.0.0.1",5000);
+
+            nombre_cliente.setText("cliente: " + server.getLocalPort());
+            String puerto_codificado = String.valueOf("0" + server.getLocalPort());
+            
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeUTF( numero_mensaje);
+            out.writeUTF(puerto_codificado);
             socket.close();
             
-            
+            /**
+             * Crea un Socket para escuchar los mensajes que le envie el servidor, y luego
+             * los muestra en pantalla
+             */
             while(true){
                 Socket serversocker =  server.accept();
                 DataInputStream datos = new DataInputStream(serversocker.getInputStream());
+
                 String mensajes = datos.readUTF();
                 Campos_textoC.append("\n"+mensajes);
-            
-            
             }
             
         } catch (Exception e) {
-        
-        
-        System.out.println(e);}
-        
+        System.out.println(e);}    
     }
 }

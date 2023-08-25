@@ -32,8 +32,7 @@ public class Servidor{
                 /**
                  * Revisa si el mensaje que le acaba de llegar es un puerto codificado, lo descodifica y lo pone
                  * en una lista enlazada.
-                 * El puerto se codifica transformandolo en un string y añadiendole un "0" al principio
-                 * desde el cliente. Ver Cliente.java
+                 * Ver Cliente.java
                  */
                 if (Objects.equals(String.valueOf(mensajes.charAt(0)), "0")){
                     mensajes = mensajes.substring(1, mensajes.length() );
