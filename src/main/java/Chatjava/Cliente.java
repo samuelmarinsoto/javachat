@@ -122,7 +122,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
         try {
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeUTF(nombre_cliente.getText()+": "+txt_mensaje.getText());
+            out.writeUTF(nombre_cliente.getText() + txt_mensaje.getText());
             socket.close();   
         }
         catch(Exception ex){
@@ -138,7 +138,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
         try {
             Socket socket = new Socket("127.0.0.1",5000);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            out.writeUTF(nombre_cliente.getText()+": "+"😀");
+            out.writeUTF(nombre_cliente.getText() + "😀");
             socket.close();
             
         } catch (IOException ex) {
@@ -206,7 +206,7 @@ public class Cliente extends javax.swing.JFrame implements Runnable{
             ServerSocket server = new ServerSocket(0);
             Socket socket = new Socket("127.0.0.1",5000);
 
-            nombre_cliente.setText("cliente: " + server.getLocalPort());
+            nombre_cliente.setText("cliente " + server.getLocalPort() + ": ");
             String puerto_codificado = String.valueOf("0" + server.getLocalPort());
             
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());

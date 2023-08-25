@@ -48,7 +48,6 @@ public class Servidor{
                     Socket mensajepuertos = null;
                     
                     for (int i = 0; i < lista_puertos.size(); i++) {
-                    	System.out.println(lista_puertos.get(i));
                     	mensajepuertos = new Socket("127.0.0.1",lista_puertos.get(i));
                     	DataOutputStream out = new DataOutputStream(mensajepuertos.getOutputStream());
                     	out.writeUTF(mensajes);
