@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Chatjava","l":"Cliente"},{"p":"Chatjava","l":"Servidor"}];updateSearchResults();
